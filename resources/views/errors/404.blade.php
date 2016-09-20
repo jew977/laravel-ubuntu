@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>涉及权限分配，暂不支持修改或删除等操作</title>
+        <title>网页被外星人劫持，或不支持该操作</title>
         <style>
             html, body {
                 height: 100%;
@@ -36,7 +36,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">涉及权限分配，暂不支持修改或删除等操作</div>
+                <div class="title">网页被外星人劫持，或不支持该操作</div>
             </div>
         </div>
     </body>

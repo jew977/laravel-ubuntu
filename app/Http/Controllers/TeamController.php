@@ -20,6 +20,8 @@ class TeamController extends Controller
         $teams=User::find($userlogin_id)->teams;
         if($teams){
         return view('team.index',compact('teams'));
+        }else{
+            return redirect('/login');
         }
     }
 
@@ -82,16 +84,28 @@ public function show_domainfo($id){
      */
     public function show($id)
     {
-      //dd(Team::find($id)->user);
-       $domains=Team::find($id)->domains;
+      
+       $domains=Team::findOrFail($id)->domains;
        $domainfo=$this->show_domainfo($id);
        $team=Team::findOrFail($id);
-
+       $userlogin_id=Auth::user()->id;
+       $auther=User::where('t_id',$id)->get()->toArray();
+       $users=$team->user->toArray();
+       foreach($users as $user){
+       $user_id[]=$user['id'];
+         
+       }
+       
+     if(in_array($userlogin_id,$user_id)){
         return view('team.show',array(
             'domains'=>$domains,
             'team'=>$team,
             'domainfo'=>$domainfo
             ));
+     }else{
+        return "没有权限查看别的组"; 
+     }
+       
     }
 
     /**
@@ -180,4 +194,15 @@ public function show_domainfo($id){
             ));
         
     }
+    
+      public function domain_export($id){
+          
+        $file="domains";
+        $data=Team::find($id)->domains->toArray();
+        $controller = new ExcelController;
+        $controller->export($file,$data);//传入两个参数
+        
+  }
+    
+    
 }

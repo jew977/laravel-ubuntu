@@ -24,3 +24,4 @@ Route::get('/team/{id}/domainfo_use', 'TeamController@domainifo_use');
 Route::get('/team/{id}/domainfo_nouse', 'TeamController@domainifo_nouse');
 Route::get('/team/{id}/domainfo_beian', 'TeamController@domainfo_beian');
 Route::get('/team/{id}/domainfo_deadline', 'TeamController@domainfo_deadline');
+Route::get('excel/{id}/export','TeamController@domain_export');

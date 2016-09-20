@@ -28,13 +28,15 @@
                   </td>
 
                   <td>
-          
                    <a class="btn btn-primary" href="{{url('user',$user->id) }}">分配权限</a>
+                   <a class="btn btn-primary" href="{{url('user/'.$user->id.'/edit') }}">编辑</a>
+                   @can('domain_delete',Auth::user()->id)
                    <form class="del-user" action="{{URL('user/'.$user->id) }}" method='POST'>
                        <input type="hidden" name="_method" value="DELETE"/>
                        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                        <input type="submit" class="btn btn-danger" value="删除"/>
                    </form>
+                   @endcan
                   </td>
               </tr>
            @endforeach

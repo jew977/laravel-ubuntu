@@ -14,6 +14,7 @@ class DomainController extends Controller
 {  
     public function __construct(){
         $this->middleware('auth');
+        $this->middleware('admin',['only'=>['index']]);
     }
     
     public function index()
@@ -56,10 +57,10 @@ class DomainController extends Controller
         ];
        
         if(Domain::create(array_merge($request->all(),$data))){
-            return redirect('/domain')->with('message',array('type' => 'success', 'content' => '添加成功！'));
+            return redirect('/team')->with('message',array('type' => 'success', 'content' => '添加成功！'));
         }else{
             
-          return redirect('/domain')->with('message',array('type' => 'danger', 'content' => '添加失败！'));
+          return redirect('/team')->with('message',array('type' => 'danger', 'content' => '添加失败！'));
         }
         
       
@@ -86,11 +87,11 @@ class DomainController extends Controller
      */
     public function edit($id)
     {
-        $domains=Domain::findOrFail($id);
-        $teams=Team::all();
+        $domain=Domain::findOrFail($id);
+        $team=Team::find($domain->team_id);
         return view('domain.edit',array(
-            'domains'=>$domains,
-            'teams'=>$teams
+            'domain'=>$domain,
+            'team'=>$team
             ));
     }
 
@@ -137,7 +138,6 @@ class DomainController extends Controller
   public function postSearch(Request $request){
       $site=$request->get('domain_name');
       $domains=Searchy::domains('domain_name')->query($site)->get();
-      //$domains=$domainsSearch::paginate(12);
       if($domains){
           return view('search.index',compact('domains'));
       }else{
@@ -185,4 +185,6 @@ class DomainController extends Controller
         return view('domain.index',compact('domains'));
     }
   
+  
+
 }

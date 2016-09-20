@@ -25,11 +25,13 @@
                   <td>是</td>
                   <td>
                   <a class="btn btn-primary" href="{{url('team',$team->id)}}">访问</a>
+                  @can('domain_delete',Auth::user()->id)
                    <form class="del-user" action="{{URL('team/'.$team->id) }}" method='POST'>
                        <input type="hidden" name="_method" value="DELETE"/>
                        <input type="hidden" name="_token" value="{{csrf_token()}}"/>
                        <input type="submit" class="btn btn-danger" value="删除"/>
                    </form>
+                   @endcan
                   </td>
               </tr>
               

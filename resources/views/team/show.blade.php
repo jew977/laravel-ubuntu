@@ -11,11 +11,12 @@
       
          <div class="row"> 
           <p class="domain_nav">
-          <a href="{{url('/team/1')}}" class="btn domain-total">所有域名 {{$domainfo['domain_total']}}个</a>
-          <a href="{{url('/team/1/domainfo_use')}}" class="btn domain-use">正用域名 {{$domainfo['domain_use']}}个</a>
-          <a href="{{url('/team/1/domainfo_nouse')}}" class="btn domain-nouse">未用域名{{$domainfo['domain_zwuse']}}个</a>
-          <a href="{{url('/team/1/domainfo_beian')}}" class="btn domain-beian">备案域名 {{$domainfo['domain_beian']}}个</a>
-          <a href="{{url('/team/1/domainfo_deadline')}}" class="btn domain-update">到期域名{{$domainfo['dead_time']}}个</a></p>
+          <a href="{{url('team',$team->id)}}" class="btn domain-total">所有域名 {{$domainfo['domain_total']}}个</a>
+          <a href="{{url('/team/'.$team->id.'/domainfo_use')}}" class="btn domain-use">正用域名 {{$domainfo['domain_use']}}个</a>
+          <a href="{{url('/team/'.$team->id.'/domainfo_nouse')}}" class="btn domain-nouse">未用域名{{$domainfo['domain_zwuse']}}个</a>
+          <a href="{{url('/team/'.$team->id.'/domainfo_beian')}}" class="btn domain-beian">备案域名 {{$domainfo['domain_beian']}}个</a>
+          <a href="{{url('/team/'.$team->id.'/domainfo_deadline')}}" class="btn domain-update">到期域名{{$domainfo['dead_time']}}个</a>
+          <a href="{{url('excel/'.$team->id.'/export')}}" class="btn domain-execl">导出EXECL</a></p>
           <table class="table table-hover user-table">
              <th></th><th>id</th><th>域名</th><th>域名注册商</th><th>域名类型</th><th>域名价格</th><th>域名状态</th><th>备案状态</th><th>域名用途</th><th>域名到期日期</th><th>项目备注</th><th>管理</th>
             @foreach($domains as $domain)
