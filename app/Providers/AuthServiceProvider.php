@@ -22,10 +22,13 @@ class AuthServiceProvider extends ServiceProvider
      * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
-    public function boot(GateContract $gate)
-    {
-        $this->registerPolicies($gate);
-
-        //
-    }
+      public function boot(GateContract $gate){
+      parent::registerPolicies($gate);
+      $permissions = \App\Permission::with('roles')->get();
+      foreach ($permissions as $permission) {
+        $gate->define($permission->name, function($user) use ($permission) { 
+            return $user->hasPermission($permission);
+        });
+       }
+     }
 }
